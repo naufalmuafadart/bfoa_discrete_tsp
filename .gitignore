@@ -1,0 +1,7 @@
+/.idea
+/dataset/distance_matrix
+__pycache__/
+*/__pycache__/
+**/__pycache__/
+*.py[cod]
+test.py
