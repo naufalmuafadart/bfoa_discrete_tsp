@@ -5,3 +5,5 @@ __pycache__/
 **/__pycache__/
 *.py[cod]
 test.py
+tsp_gpt.py
+*.xlsx

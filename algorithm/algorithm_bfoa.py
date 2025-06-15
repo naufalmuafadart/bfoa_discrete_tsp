@@ -234,7 +234,7 @@ class BFOA:
             self.best_troops_fitness = self.squad2.commander.fitness_value
 
     def execute(self):
-        print('start phase 1')
+        # print('start phase 1')
         self.phase_1_initialization()
         for i in range(self.phase_1_max_iteration): # Airplane movement
             for j in range(self.n_plane):
@@ -252,9 +252,9 @@ class BFOA:
         else:
             self.squad1.mode = SquadMode.ATTACKING
             self.squad2.mode = SquadMode.DEFENDING
-        print('end phase 1')
+        # print('end phase 1')
 
-        print('start phase 2')
+        # print('start phase 2')
         for i in range(self.phase_2_max_iteration): # builder movement
             if self.is_squad_1_better():
                 self.squad1.commander.builder_movement()
@@ -295,19 +295,22 @@ class BFOA:
             else:
                 self.squad1.mode = SquadMode.ATTACKING
                 self.squad2.mode = SquadMode.DEFENDING
-        print('phase 2 done')
-        print('best troops: ', self.best_troops)
-        print('best troops fitness: ', self.best_troops_fitness)
+        # print('phase 2 done')
+        # print('best troops: ', self.best_troops)
+        # print('best troops fitness: ', self.best_troops_fitness)
         return [self.best_troops], self.best_troops_fitness
 
 class BfOA_TSP(Algorithm):
+    def __init__(self, agent_length, dataset_name):
+        super().__init__(agent_length, dataset_name)
+
     def run(self):
         algorithm = BFOA(
-            10,
+            14,
             self.tsp_fitness_function,
             100,
             10,
-            [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+            [i for i in range(1, self.AGENT_LENGTH + 1)],
             False
         )
         return algorithm.execute()
