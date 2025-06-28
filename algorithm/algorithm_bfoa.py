@@ -87,16 +87,19 @@ class Agent:
         self.calculate_fitness()
 
     """
-    Perform flanking movement using 2-opt mutation
-
-    Args:
-        enemy_commander (list): Enemy chromosome
+    Perform flanking movement using cyclic moves mutation
+    
+    This method selects a segment of the tour and rotates it by a random amount
     """
     def cavalry_movement(self):
         n = len(self.vector)
         i, j = sorted(random.sample(range(n), 2))
-        # Reverse the subsequence between i and j
-        self.vector[i:j + 1] = self.vector[i:j + 1][::-1]
+        # Get the segment to rotate
+        segment = self.vector[i:j + 1]
+        # Choose a random rotation amount (between 1 and length-1 to ensure actual change)
+        rotation = random.randint(1, len(segment) - 1)
+        # Rotate the segment and place it back
+        self.vector[i:j + 1] = segment[rotation:] + segment[:rotation]
         self.calculate_fitness()
 
     """
@@ -188,8 +191,8 @@ class BFOA:
         self.N = N
         self.n_plane = 8
         self.population = []
-        self.phase_1_max_iteration = 100
-        self.phase_2_max_iteration = 100
+        self.phase_1_max_iteration = 2
+        self.phase_2_max_iteration = 2
         self.squad1 = Squad(SquadMode.ATTACKING)
         self.squad2 = Squad(SquadMode.DEFENDING)
         self.best_troops = None
