@@ -309,7 +309,7 @@ class BfOA_TSP(Algorithm):
 
     def run(self):
         algorithm = BFOA(
-            14,
+            self.AGENT_LENGTH,
             self.tsp_fitness_function,
             100,
             10,
